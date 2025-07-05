@@ -21,8 +21,6 @@ public class PdfController {
     @PostMapping("/generate")
     public ResponseEntity<String> generatePDF(@RequestBody PdfRequest data) throws IOException {
         String fileName = "generated_pdfs/" + data.getTitle() + ".pdf";
-
-
         byte[] pdfContent = pdfService.generatePDF(data);
         pdfService.savePDF(pdfContent, fileName);
         return ResponseEntity.ok("PDF generated and saved successfully");
@@ -31,10 +29,7 @@ public class PdfController {
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadPDF(@RequestParam String title) throws IOException {
         String fileName = "generated_pdfs/" + data.getTitle() + ".pdf";
-
-
         byte[] pdfContent = pdfService.loadPDF(fileName);
-
         if (pdfContent == null || pdfContent.length == 0) {
             return ResponseEntity.notFound().build();
         }
