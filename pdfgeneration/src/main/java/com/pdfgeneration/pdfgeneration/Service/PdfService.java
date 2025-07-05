@@ -27,7 +27,8 @@ public class PdfService {
 
   Path tempDir = Files.createTempDirectory("pdf-test");
 String fileName = tempDir.resolve("Test_PDF.pdf").toString();
-pdfService.savePDF(pdfContent, fileName);
+public void savePDF(byte[] content, String filePath)
+
 
 
     public PdfService(TemplateEngine templateEngine) {
