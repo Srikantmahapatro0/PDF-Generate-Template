@@ -1,20 +1,13 @@
 package com.pdfgeneration.pdfgeneration.Service;
 
 import com.pdfgeneration.pdfgeneration.Models.PdfRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.TemplateEngine;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,16 +15,11 @@ import java.nio.file.Paths;
 
 @Service
 public class PdfService {
+    private static final String BASE_DIRECTORY = "generated_pdfs";
+
     private final TemplateEngine templateEngine;
 
-
-  Path tempDir = Files.createTempDirectory("pdf-test");
-String fileName = tempDir.resolve("Test_PDF.pdf").toString();
-public void savePDF(byte[] content, String filePath);
-
-
-
-    public PdfService(TemplateEngine templateEngine) {
+    public PdfService(TemplateEngine templateEngine) throws IOException {
         this.templateEngine = templateEngine;
     }
 
@@ -39,6 +27,7 @@ public void savePDF(byte[] content, String filePath);
         Context context = new Context();
         context.setVariable("title", data.getTitle());
         context.setVariable("contents", data.getContents());
+
         String htmlContent = templateEngine.process("pdfTemplate", context);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -50,11 +39,11 @@ public void savePDF(byte[] content, String filePath);
         return outputStream.toByteArray();
     }
 
-    public void savePDF(byte[] pdfContent, String fileName) throws IOException {
-        Path path = Paths.get(BASE_DIRECTORY);
-        Files.createDirectories(path);
-        Path fullPath = path.resolve(fileName);
-        Files.write(fullPath, pdfContent);
+    public void savePDF(byte[] content, String fileName) throws IOException {
+        Path dir = Paths.get(BASE_DIRECTORY);
+        Files.createDirectories(dir);
+        Path fullPath = dir.resolve(fileName);
+        Files.write(fullPath, content);
     }
 
     public byte[] loadPDF(String fileName) throws IOException {
