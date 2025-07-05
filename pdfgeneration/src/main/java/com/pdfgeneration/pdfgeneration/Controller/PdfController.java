@@ -28,7 +28,7 @@ public class PdfController {
 
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadPDF(@RequestParam String title) throws IOException {
-        String fileName = "generated_pdfs/" + data.getTitle() + ".pdf";
+        String fileName = "generated_pdfs/" + title + ".pdf";
         byte[] pdfContent = pdfService.loadPDF(fileName);
         if (pdfContent == null || pdfContent.length == 0) {
             return ResponseEntity.notFound().build();
