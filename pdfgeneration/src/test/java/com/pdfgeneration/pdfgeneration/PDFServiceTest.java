@@ -27,8 +27,7 @@ public class PDFServiceTest {
 		data.setContents(List.of("Item 1", "Item 2", "Item 3"));
 
 		byte[] pdfContent = pdfService.generatePDF(data);
-		pdfService.savePDF(pdfContent, "generated_pdfs/Test PDF.pdf");
-
+		pdfService.savePDF(pdfContent, "Test PDF.pdf");
 		byte[] loadedPDF = pdfService.loadPDF("generated_pdfs/Test PDF.pdf");
 		assertTrue(Objects.equals(new String(pdfContent), new String(loadedPDF)));
 	}
