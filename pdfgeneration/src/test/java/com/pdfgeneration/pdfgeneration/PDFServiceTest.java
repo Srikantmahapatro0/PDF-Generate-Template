@@ -7,12 +7,12 @@ import org.thymeleaf.context.Context;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PDFServiceTest {
 
-    // Mocked TemplateEngine that doesn't need an actual template file
     class DummyTemplateEngine extends TemplateEngine {
         @Override
         public String process(String template, Context context) {
@@ -27,10 +27,10 @@ public class PDFServiceTest {
 
         PdfRequest request = new PdfRequest();
         request.setTitle("Test PDF");
-        request.setContents("This is a test PDF file.");
+        request.setContents(List.of("This is a test PDF."));  // ✅ Fixed
 
         byte[] bytes = pdfService.generatePDF(request);
-        assertNotNull(bytes); // ✅ Prevent NPE
+        assertNotNull(bytes);
 
         Path outputFile = Paths.get("generated_pdfs/Test PDF.pdf");
         pdfService.savePDF(bytes, "Test PDF.pdf");
