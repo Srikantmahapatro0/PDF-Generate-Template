@@ -1,4 +1,4 @@
-![Java CI](https://github.com/<your-username>/<your-repo>/actions/workflows/ci.yml/badge.svg)
+[![Java CI with Docker](https://github.com/Srikantmahapatro0/pdf-template-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/Srikantmahapatro0/pdf-template-generator/actions/workflows/ci.yml)
 # PDF Generation Service
 
 A simple Spring Boot application that generates PDF files from HTML templates using **Thymeleaf** and **Flying Saucer (ITextRenderer)**. It allows you to generate and download PDF documents via REST APIs.
