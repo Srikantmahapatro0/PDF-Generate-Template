@@ -15,6 +15,7 @@ A simple Spring Boot application that generates PDF files from HTML templates us
 ---
 
 ## 📦 Project Structure
+```
 
 src
 └── main
@@ -30,7 +31,7 @@ src
 ├── templates
 │ └── pdfTemplate.html
 └── application.properties
-
+```
 
 ---
 
