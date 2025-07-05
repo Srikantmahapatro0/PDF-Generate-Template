@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PDFServiceTest {
 
     class DummyTemplateEngine extends TemplateEngine {
-        @Override
         public String process(String template, Context context) {
             return "<html><body><h1>" + context.getVariable("title") + "</h1><p>" +
                     context.getVariable("contents") + "</p></body></html>";
