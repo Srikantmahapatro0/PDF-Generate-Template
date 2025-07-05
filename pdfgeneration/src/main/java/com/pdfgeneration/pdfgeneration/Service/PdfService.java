@@ -25,7 +25,10 @@ public class PdfService {
     private final TemplateEngine templateEngine;
 
 
-    private static final String BASE_DIRECTORY = "C:\\Users\\91773\\Documents\\PDFGeneration";
+  Path tempDir = Files.createTempDirectory("pdf-test");
+String fileName = tempDir.resolve("Test_PDF.pdf").toString();
+pdfService.savePDF(pdfContent, fileName);
+
 
     public PdfService(TemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
